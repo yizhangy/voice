@@ -1,4 +1,9 @@
-# Setup:
+## Environment 
+* Java 8
+* Tomcat 8.5
+
+
+## Setup:
 
 * clone this project.
 
