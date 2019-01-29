@@ -41,8 +41,8 @@ public class VoiceControlResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Payload<Text> getText(@QueryParam(PARAM_ID) String textId) throws IOException {
 		Payload<Text> payload = new Payload<>();
-		String command = "python " + AppConfig.getInstance().getVoiceFielPath() + "/test.py ";
-		Process p = Runtime.getRuntime().exec(command + textId );
+		String command = "python " + AppConfig.getInstance().getVoiceFieFolderlPath();
+		Process p = Runtime.getRuntime().exec(command + " " + textId );
 		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String ret = in.readLine();
 		Text data = new Text();
@@ -61,7 +61,7 @@ public class VoiceControlResource {
 			@FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
 		Payload<String> payload = new Payload<>();
 		String fileId = UUID.randomUUID().toString();
-		String fileName = AppConfig.getInstance().getVoiceFielPath() + "/" +fileId + ".wav";
+		String fileName = AppConfig.getInstance().getVoiceFieFolderlPath() + "/" +fileId + ".wav";
 		this.writeToFile(uploadedInputStream, fileName);
 	
 		payload.setData(fileId);

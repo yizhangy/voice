@@ -24,11 +24,11 @@ public class AppConfig {
 		return instance;
 	}
 	
-	public String pythonExeFilePath() {
-		return config.getString("python.exe.path");
+	public String getPythonExeFilePath() {
+		return config.getString("python.exe.file.path");
 	}
 
-	public String getVoiceFielPath() {
-		return config.getString("voice.file.path");
+	public String getVoiceFieFolderlPath() {
+		return config.getString("voice.file.folder.path");
 	}
 }
