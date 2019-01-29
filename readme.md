@@ -2,13 +2,12 @@ Setup:
 
 clone this project.
 
-1. cd  to voice/src/main/resource
-update app.properties file
-
-update the value of "voice.file.folder.path" and "python.exe.file.path"
+1. cd  to voice/src/main/resource and update app.properties file. Update the value of "voice.file.folder.path" and "python.exe.file.path"
 
 2. run following command 
+```
 mvn package
+```
 it will generate war file under voice/target
 
 3. deploy the war file into your tomcat webapp folder
