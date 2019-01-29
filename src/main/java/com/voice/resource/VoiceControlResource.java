@@ -41,7 +41,7 @@ public class VoiceControlResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Payload<Text> getText(@QueryParam(PARAM_ID) String textId) throws IOException {
 		Payload<Text> payload = new Payload<>();
-		String command = "python " + AppConfig.getInstance().getVoiceFieFolderlPath();
+		String command = "python " + AppConfig.getInstance().getPythonExeFilePath();
 		Process p = Runtime.getRuntime().exec(command + " " + textId );
 		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String ret = in.readLine();
