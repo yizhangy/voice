@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="w3.org/2001/XMLSchema-instance"
+xmlns="xmlns.jcp.org/xml/ns/javaee"
+xsi:schemaLocation="xmlns.jcp.org/xml/ns/javaee xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+id="canaan" version="3.1">
+  <display-name>canaan</display-name>
+    <servlet>
+        <servlet-name>Jersey Web Application</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.voice.resource</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+		    <param-name>jersey.config.server.provider.classnames</param-name>
+		    <param-value>org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
+		</init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey Web Application</servlet-name>
+        <url-pattern>/restws/*</url-pattern>
+    </servlet-mapping>
+    <!-- Register the guice injector into the servlet context and also for jersey HK2 bridge -->
+    <listener>
+    	<listener-class>com.voice.web.servlet.listener.GuiceServletListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+             
+    <!-- Packtag -->
+    <servlet>
+        <description>This is the servlet needed for cache.type servlet, returns the packed resources</description>
+        <display-name>PackServlet</display-name>
+        <servlet-name>PackServlet</servlet-name>
+        <servlet-class>net.sf.packtag.servlet.PackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PackServlet</servlet-name>
+        <url-pattern>*.pack</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>net.sf.packtag.filter.GzipFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <!-- End Packtag -->
+
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>
+    	<location>/error.html</location>
+	</error-page>
+</web-app>
