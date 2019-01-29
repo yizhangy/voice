@@ -1,20 +1,20 @@
-Setup:
+# Setup:
 
-clone this project.
+* clone this project.
 
-1. cd  to voice/src/main/resource and update app.properties file. Update the value of "voice.file.folder.path" and "python.exe.file.path"
+* cd  to voice/src/main/resource and update app.properties file. Update the value of "voice.file.folder.path" and "python.exe.file.path"
 
-2. run following command 
+* run following command 
 ```
 mvn package
 ```
 it will generate war file under voice/target
 
-3. deploy the war file into your tomcat webapp folder
+*  deploy the war file into your tomcat webapp folder
 
-4. Call following API
+* Call following API
 
-h4 upload a voice file to your server folder "voice.file.folder.path" which is defined in your app.properties file.
+### upload a voice file to your server folder "voice.file.folder.path" which is defined in your app.properties file.
 
 Method: POST
 URL: http://ip:portnumber/restws/voice/v1/save
@@ -33,7 +33,7 @@ response:
 }
 ```
 
-h4 retrieve the text from voice file by using last API's response 118aa787-11ae-4325-b46a-a305991b84d5
+### retrieve the text from voice file by using last API's response 118aa787-11ae-4325-b46a-a305991b84d5
 
 Method: GET
 URL: http://ip:portnumber/restws/voice/v1/txt?id=<voice file id>
