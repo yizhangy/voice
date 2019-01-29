@@ -38,7 +38,7 @@ the voice file my.wav will upload under your "voice.file.folder.path" with a uni
 }
 ```
 
-### retrieve the text from voice file by using last API's response 118aa787-11ae-4325-b46a-a305991b84d5
+### retrieve the text from voice file by using last API's response
 
 * Method: GET
 * URL: http://ip:portnumber/restws/voice/v1/txt?id=<voice file id>
