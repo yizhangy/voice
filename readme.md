@@ -14,7 +14,7 @@ it will generate war file under voice/target
 
 4. Call following API
 
-upload a voice file to your server folder "voice.file.folder.path" which is defined in your app.properties file.
+h4. upload a voice file to your server folder "voice.file.folder.path" which is defined in your app.properties file.
 
 Method: POST
 URL: http://ip:portnumber/restws/voice/v1/save
@@ -33,7 +33,7 @@ response:
 }
 ```
 
-retrieve the text from voice file by using last API's response 118aa787-11ae-4325-b46a-a305991b84d5
+h4. retrieve the text from voice file by using last API's response 118aa787-11ae-4325-b46a-a305991b84d5
 
 Method: GET
 URL: http://ip:portnumber/restws/voice/v1/txt?id=<voice file id>
