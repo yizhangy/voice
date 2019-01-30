@@ -7,10 +7,18 @@
 
 * clone this project.
 
-* cd  to voice/src/main/resource and update app.properties file. Update the value of "voice.file.folder.path" and "python.exe.file.path"
+* cd  to src/main/java/com/voice/common/AppConfig.java update python execute file path and audio file storage path.
+
+* cd to webapp/app.js update following variable values (eg. change the localhost to right ip address and port number etc)
+```
+var saveFileUrl = "http://localhost:8080/voice/restws/voice/v1/save";
+var getTextUrl = "http://localhost:8080/voice/restws/voice/v1/txt";
+```
 
 * run following command 
 ```
+rm -rf target
+
 mvn package
 ```
 it will generate war file under voice/target
