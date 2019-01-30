@@ -3,11 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 
-demo
+
+	<h1>Simple demo</h1>
+	<br/>
+	<br/>
+	<h3>Output Text After Recognition Process</h3>
+	<div id="display-txt">
+	
+	</div>
+    <div id="controls">
+  	 <button id="recordButton">Record</button>
+  	 <button id="pauseButton" disabled>Pause</button>
+  	 <button id="stopButton" disabled>Stop</button>
+  	 <input type="file" id="fileElem" multiple accept="audio/*" style="display:none" onchange="handleFileUpload(this.files)">
+	 <button id="fileSelectButton">Or drop an audio file</button>
+    </div>
+    <div id="upload">
+    		
+    </div>
+    <div id="formats">Format: start recording</div>
+  	<h3>Recordings</h3>
+  	<ol id="recordingsList"></ol>
+
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  	<script src="app.js"></script>
+  
 </body>
 
 </html>
