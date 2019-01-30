@@ -23,6 +23,7 @@ pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
 	console.log("recordButton clicked");
+	document.getElementById("formats").innerHTML="Format: start recording...";
 
 	/*
 		Simple constraints object, for more advanced audio features see
