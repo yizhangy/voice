@@ -117,6 +117,8 @@ function stopRecording() {
 
 	//create the wav blob and pass it on to createDownloadLink
 	rec.exportWAV(createDownloadLink);
+	
+	
 }
 
 var fileSelect = document.getElementById("fileSelectButton"),
@@ -161,36 +163,42 @@ function createDownloadLink(blob) {
 	li.appendChild(link);
 	
 	//upload link
-	var upload = document.createElement('a');
-	upload.href="#";
-	upload.innerHTML = "Recognise";
-	upload.addEventListener("click", function(event){
-		  var xhr=new XMLHttpRequest();
-		  var fd=new FormData();
-		  fd.append("file",blob, filename);
-		  xhr.open("POST", saveFileUrl, true);
-		  xhr.onload = function (e) {
-			    // do something to response
-				var response = JSON.parse(this.response);
-			  	if (response.status === 200) {
-			  		var xhr = new XMLHttpRequest();
-			  			
-				    xhr.onload = function (e) {
-			  			var rsp = JSON.parse(this.response),
-				    			txtNode = document.getElementById('display-txt');
-			  			txtNode.innerHTML='';
-			  			txtNode.innerHTML=rsp.data.content;
-				    }
-				    xhr.open('GET', getTextUrl+"?id="+response.data, true);
-				    xhr.send();
-			  	}
-			    
-			};
-		  xhr.send(fd);
-	})
-	li.appendChild(document.createTextNode (" "))//add a space in between
-	li.appendChild(upload)//add the upload link to li
+	var xhr=new XMLHttpRequest();
+	var fd=new FormData();
+	fd.append("file",blob, filename);
+	xhr.open("POST", saveFileUrl, true);
+	xhr.onload = function (e) {
+	    // do something to response
+		var response = JSON.parse(this.response);
+	  	if (response.status === 200) {
+	  		var upload = document.createElement('a');
+	  		upload.href="javascript:void(0)";
+	  		upload.innerHTML = "Recognise";
+	  		upload.addEventListener("click", function(event){
+	  			  var xhr=new XMLHttpRequest();
+	  			  xhr.open("GET", getTextUrl+"?id="+response.data, true);
+	  			  xhr.onload = function (e) {
+	  				// do something to response
+	  				var rsp = JSON.parse(this.response),
+				    		txtNode = document.getElementById('display-txt');
+	  				if (rsp.status === 200) {
+	  				  	txtNode.innerHTML='';
+	  				  	txtNode.innerHTML=rsp.data.content;
+	  				}else{
+	  					txtNode.innerHTML='';
+	  				  	txtNode.innerHTML="Processing! Please wait.";
+	  				}
+	  				    
+	  			  };
+	  			  xhr.send(fd);
+	  		})
+	  		li.appendChild(document.createTextNode (" "))//add a space in between
+	  		li.appendChild(upload)//add the upload link to li
 
-	//add the li element to the ol
-	recordingsList.appendChild(li);
+	  		//add the li element to the ol
+	  		recordingsList.appendChild(li);
+	  	}
+	    
+	};
+	xhr.send(fd);
 }

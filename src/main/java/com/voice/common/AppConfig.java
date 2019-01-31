@@ -15,4 +15,8 @@ public class AppConfig {
 	public String getVoiceFieFolderlPath() {
 		return "/Users/yizhangyin/Documents/wav";
 	}
+	
+	public String getRecognitionTxtPath() {
+		return "/Users/yizhangyin/Documents/recoginition";
+	}
 }

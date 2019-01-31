@@ -7,10 +7,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Scanner;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -42,16 +44,30 @@ public class VoiceControlResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Payload<Text> getText(@QueryParam(PARAM_ID) String textId) throws IOException {
 		Payload<Text> payload = new Payload<>();
-		String command = "python " + AppConfig.getInstance().getPythonExeFilePath();
-		Process p = Runtime.getRuntime().exec(command + " " + textId);
-		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String ret = in.readLine();
 		Text data = new Text();
-		data.setContent(ret);
 		data.setId(textId);
-		payload.setData(data);
-		payload.setStatus(Response.Status.OK.getStatusCode());
-		return payload;
+		StringBuilder builder = new StringBuilder();
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(AppConfig.getInstance().getRecognitionTxtPath() + "/" + textId + ".txt"));
+			String line = reader.readLine();
+			while (line != null) {
+				builder.append(line + "<br/>");
+				// read next line
+				line = reader.readLine();
+			}
+			reader.close();
+			data.setContent(builder.toString());
+			payload.setData(data);
+			payload.setStatus(Response.Status.OK.getStatusCode());
+			return payload;
+		} catch (IOException e) {
+			data.setContent("");
+			payload.setData(data);
+			payload.setStatus(1000);
+			return payload;
+		}
+		
 	}
 
 	@POST
@@ -64,7 +80,8 @@ public class VoiceControlResource {
 		String fileId = UUID.randomUUID().toString();
 		String fileName = AppConfig.getInstance().getVoiceFieFolderlPath() + "/" + fileId + ".wav";
 		this.writeToFile(uploadedInputStream, fileName);
-
+		String command = "python " + AppConfig.getInstance().getPythonExeFilePath();
+		Runtime.getRuntime().exec(command + " --file " + fileId);
 		payload.setData(fileId);
 		payload.setStatus(Response.Status.OK.getStatusCode());
 		return payload;
