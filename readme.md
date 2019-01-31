@@ -7,7 +7,7 @@
 
 * clone this project.
 
-* cd  to src/main/java/com/voice/common/AppConfig.java update python execute file path and audio file storage path.
+* cd  to src/main/java/com/voice/common/AppConfig.java update python execute file path, Recognition text Path and audio file storage path.
 
 * cd to webapp/app.js update following variable values (eg. change the localhost to right ip address and port number etc)
 ```
